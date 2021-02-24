@@ -27,12 +27,11 @@ table {
   text-align: left; 
 }
 
-th, td {
+th {
   border-bottom: 1px solid black;
   padding: 9px;
   padding-right: 200px;
 }
-
 
 legend {
     margin-left: -280px;

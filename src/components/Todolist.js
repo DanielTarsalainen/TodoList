@@ -8,7 +8,7 @@ function Todolist() {
 
   const addTodo = (event) => {
     event.preventDefault();
-    setTodos([...todos, item])
+    setTodos([...todos, item]);
     setTitle(<tr><th>Description</th><th>Title</th></tr>);
   }
 
@@ -44,8 +44,8 @@ function Todolist() {
           {title}
           {todos.map((item, index) =>
             <tr key={index}>
-              <td>{item.date}</td>
               <td>{item.description}</td>
+              <td>{item.date}</td>
               <td><button value={index} onClick={e => removeTodo(e.target.value)}>Delete</button></td>
             </tr>)}
         </tbody>

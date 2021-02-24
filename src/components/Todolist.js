@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 
 function Todolist() {
 
-  const [item, setItem] = useState({ description: '', date: '' });
+  const [item, setItem] = useState({
+    description: '', date: ''
+  });
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
 
   const addTodo = (event) => {
     event.preventDefault();
     setTodos([...todos, item]);
-    setTitle(<tr><th>Description</th><th>Title</th></tr>);
+    setTitle(<tr><th>Description</th><th>Date</th></tr>);
   }
 
   const inputChanged = (event) => {

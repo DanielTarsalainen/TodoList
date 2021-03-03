@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Todotable from './Todotable';
 
 function Todolist() {
 
@@ -17,11 +18,10 @@ function Todolist() {
   const inputChanged = (event) => {
     setItem({ ...item, [event.target.name]: event.target.value });
   }
+  // ... tuo uusimman!
 
-  const removeTodo = index => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const removeTodo = (row) => {
+    setTodos(todos.filter((todo, index) => index !== row));
   };
 
   return (
@@ -36,22 +36,12 @@ function Todolist() {
             <label>Description: </label>
             <input type="text" name="description" value={item.description} onChange={inputChanged} />
             <label>Date: </label>
-            <input type="text" name="date" value={item.date} onChange={inputChanged} />
+            <input type="date" name="date" value={item.date} onChange={inputChanged} />
             <input type="submit" value="Add" />
           </fieldset>
         </form>
+        <Todotable todos={todos} removeTodo={removeTodo} />
       </div>
-      <table>
-        <tbody>
-          {title}
-          {todos.map((item, index) =>
-            <tr key={index}>
-              <td>{item.description}</td>
-              <td>{item.date}</td>
-              <td><button value={index} onClick={e => removeTodo(e.target.value)}>Delete</button></td>
-            </tr>)}
-        </tbody>
-      </table>
     </div>
   );
 }

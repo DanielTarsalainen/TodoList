@@ -5,6 +5,7 @@ function Todotable(props) {
     <div>
       <table>
         <tbody>
+          <td><tr><h4>Description</h4></tr></td> <td><tr><h4>Date</h4></tr></td>
           {props.todos.map((item, index) =>
             <tr key={index}>
               <td>{item.description}</td>

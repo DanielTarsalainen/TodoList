@@ -1,12 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
+
+
 
 const Todolist = () => {
   const [todo, setTodo] = useState({ description: '', date: '', priority: '' });
   const [todos, setTodos] = useState([]);
+
+  const copy = [...todos, null];
 
   const gridRef = useRef();
 
@@ -16,6 +22,10 @@ const Todolist = () => {
 
   const addTodo = () => {
     setTodos([...todos, todo]);
+  }
+
+  const clearState = () => {
+    setTodos([]);
   }
 
   const deleteTodo = () => {
@@ -35,14 +45,40 @@ const Todolist = () => {
   ];
 
   return (
-    <div>
-      <input type="text" onChange={inputChanged} placeholder="Description" name="description" value={todo.description} />
-      <input type="date" onChange={inputChanged} placeholder="Date" name="date" value={todo.date} />
-      <input type="text" onChange={inputChanged} placeholder="Priority" name="priority" value={todo.priority} />
-      <button onClick={addTodo}>Add</button>
-      <button onClick={deleteTodo}>Delete</button>
+    <div style={{ marginTop: "7vh" }}>
+      <TextField
+        style={{ margin: 5 }}
+        label="Description"
+        onChange={inputChanged}
+        name="description"
+        value={todo.description}
+      />
 
-      <div className="ag-theme-material" style={{ width: '50%', height: '700px', margin: 'auto' }}>
+      <TextField
+        style={{ margin: 21 }}
+        id="date"
+        type="date"
+        name="date"
+        onChange={inputChanged}
+        value={todo.date}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+
+      <TextField
+        style={{ margin: 5 }}
+        label="Priority"
+        onChange={inputChanged}
+        name="priority"
+        value={todo.priority}
+      />
+      <Button style={{ marginTop: 15 }} variant="contained" color="primary" onClick={addTodo}>Add</Button>
+      <Button style={{ marginTop: 15 }} variant="contained" color="secondary" onClick={deleteTodo}>Delete</Button>
+      <Button style={{ marginTop: 15 }} variant="contained" color="warning" onClick={clearState}>Clear All</Button>
+
+
+      <div className="ag-theme-material" style={{ width: '40%', height: '700px', margin: 'auto' }}>
         <AgGridReact
           rowData={todos}
           columnDefs={columns}

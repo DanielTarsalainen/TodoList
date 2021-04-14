@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 
 
@@ -35,6 +37,10 @@ const Todolist = () => {
       alert('Choose a row that you want to delete');
   }
 
+  const handleDateChange = (date) => {
+    setTodo({ ...todo, date: date.toISOString() })
+  }
+
   const columns = [
     { headerName: "Description", field: "description", sortable: true, filter: true, floatingFilter: true },
     { headerName: "Date", field: "date", sortable: true, filter: true, floatingFilter: true },
@@ -54,17 +60,10 @@ const Todolist = () => {
         value={todo.description}
       />
 
-      <TextField
-        style={{ margin: 21 }}
-        id="date"
-        type="date"
-        name="date"
-        onChange={inputChanged}
-        value={todo.date}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <DatePicker style={{ margin: 21 }} format="dd.MM.yyyy" value={todo.date} onChange={handleDateChange}>
+        </DatePicker>
+      </MuiPickersUtilsProvider>
 
       <TextField
         style={{ margin: 5 }}
